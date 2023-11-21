@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "38387631093",
+    "project_id": "duckyonthi-83207",
+    "storage_bucket": "duckyonthi-83207.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38387631093:android:f5131167e0195bbcb4d6bc",
+        "android_client_info": {
+          "package_name": "com.pigstudy.duckyonthi1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38387631093-afuh5cikm7cp6o2iog7ugknh5gpgfoif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBezHmfFUqwNdA7P_kjE9142q_2XXDFf6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38387631093-afuh5cikm7cp6o2iog7ugknh5gpgfoif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
