@@ -3,23 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:travo_app_source/LightAndDark.dart/theme_provider.dart';
-import 'package:travo_app_source/representation/BottomNavigationBar.dart';
-import 'package:travo_app_source/representation/local_storage_helper.dart';
+import 'package:travo_app_source/light_and_dark.dart/theme_provider.dart';
 import 'package:travo_app_source/routes.dart';
+import 'package:travo_app_source/screens/representation/bottom_navigation_bar.dart';
+import 'package:travo_app_source/screens/representation/local_storage_helper.dart';
 import 'package:travo_app_source/size_config.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(  );
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   await Hive.initFlutter();
   await LocalStorageHelper.initLocalStorageHelper();
-
   runApp(MyApp());
+}
+
+class DefaultFirebaseOptions {
 }
 
 class MyApp extends StatelessWidget {

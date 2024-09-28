@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:travo_app_source/EnglishClassUnivercity/english12_screen.dart';
-import 'package:travo_app_source/Users/SettingScreen.dart';
-import 'package:travo_app_source/Users/UsersScreen.dart';
-import 'package:travo_app_source/account/login.dart';
-import 'package:travo_app_source/account/register.dart';
-import 'package:travo_app_source/representation/Home_Screen.dart';
-import 'package:travo_app_source/representation/BottomNavigationBar.dart';
-import 'package:travo_app_source/representation/home_screen2.dart';
+import 'package:travo_app_source/screens/Users/setting_screen.dart';
+import 'package:travo_app_source/screens/Users/users_screen.dart';
+import 'package:travo_app_source/account/login_screen.dart';
+import 'package:travo_app_source/account/register_screen.dart';
+import 'package:travo_app_source/screens/english12_screen.dart';
+import 'package:travo_app_source/screens/representation/Home_Screen.dart';
+import 'package:travo_app_source/screens/representation/home_screen2.dart';
 
 final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
