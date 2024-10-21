@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/group_Chat/Creat_Question.dart';
-import 'package:travo_app_source/screens/group_Chat/History_Chat.dart';
-import 'package:travo_app_source/screens/group_Chat/Question_Coment.dart';
+import 'package:travo_app_source/screens/group_chat/Creat_Question.dart';
+import 'package:travo_app_source/screens/group_chat/History_Chat.dart';
+import 'package:travo_app_source/screens/group_chat/Question_Coment.dart';
 
 class MainChatScreen extends StatefulWidget {
   const MainChatScreen({Key? key}) : super(key: key);

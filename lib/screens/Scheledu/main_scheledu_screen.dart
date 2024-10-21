@@ -3,7 +3,7 @@ import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:travo_app_source/screens/Scheledu/add_task_screen.dart';
+import 'package:travo_app_source/screens/scheledu/add_task_screen.dart';
 
 class MainScheleduScreen extends StatefulWidget {
   const MainScheleduScreen({Key? key}) : super(key: key);

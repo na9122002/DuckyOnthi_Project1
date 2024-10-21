@@ -30,12 +30,13 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
 
     super.initState();
   }
-
+  DateTime startTime = DateTime.now();
   List<List<Color?>> _color = [[]];
   int quantityQ = 0;
-  int time = 0;
-  int Minutes = 0;
-  int Seconds = 0;
+ 
+    int minutesSpent = 0;
+
+  
   List<String?> Choose = [];
   int mark = 0;
   int chooseF = 0;
@@ -67,7 +68,7 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
     return listR;
   }
 
-  _CreatNopBai(int quantityQ, dynamic snapshot, dynamic OldHour, dynamic time,dynamic _models) {
+  _CreatNopBai(int quantityQ, dynamic snapshot, dynamic OldHour, dynamic hoursSpent,dynamic _models) {
     for (int i = 0; i < _models.length; i++) {
       if (Choose[i] == _models[i].trueAnwer && _models[i].id != '-') {
         mark++;
@@ -78,21 +79,19 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
         chooseF++;
       }
     }
-    String timeWorkDone = '${Minutes} : ${Seconds}';
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ResultScreen(
                   mark: mark,
                   chooseF: chooseF,
-                  M: Minutes,
-                  S: Seconds,
-                  topic: 'topic2',
+                  topic: 'topc2',
                   quantityQ: quantityQ,
                   listAnwer: listAnwer,
                   Choose: Choose,
                   subject: 'Tiếng Anh',
-                  time: time,
+                  time: hoursSpent,
+                  listItem: widget.listItem,
                 )));
   }
 
@@ -145,7 +144,7 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
       TimeDay: formatDate(DateTime.now(), [dd, '-', M, '-', yyyy]),
       Subject: subject,
       Time: Time,
-      TotalTime: time,
+      TotalTime:    minutesSpent,
       FalseAnwer: FalseAnwer,
       TrueAnswer: TrueAnswer,
       NumberAnswer: NumberAnswer,
@@ -165,23 +164,24 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
   }
 
   _CreatExercisesDone(dynamic OldHour, dynamic numbertrueAnswer,
-      dynamic numberflaseAnwer, dynamic _time, dynamic _minutes,dynamic _models) async {
+      dynamic numberflaseAnwer, dynamic _hoursSpent,dynamic _models) async {
     int trueAnswerNow = 0;
     int falseAnwerNow = 0;
-    for (int i = 0; i < _models!.length; i++) {
-      if (Choose[i] == _models![i].trueAnswer && _models![i].id != '-') {
+          for (int i = 0; i < _models!.length; i++) {
+      if (Choose[i] == _models![i].trueAnwer && _models![i].id != '-') {
         trueAnswerNow++;
       }
-      if (Choose[i] != _models![i].trueAnswer &&
+      if (Choose[i] != _models![i].trueAnwer &&
           Choose[i] != "" &&
           _models![i].id != '-') {
         falseAnwerNow++;
       }
     }
+   
+   
     dynamic docIDUser;
-    OldHour += _time - _minutes;
-    numberflaseAnwer = falseAnwerNow + numberflaseAnwer;
-    numbertrueAnswer = trueAnswerNow + numbertrueAnswer;
+    // numberflaseAnwer = falseAnwerNow + numberflaseAnwer;
+    // numbertrueAnswer = trueAnswerNow + numbertrueAnswer;
     final Users = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance
         .collection('users')
@@ -191,6 +191,10 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
               print(document.reference);
               docIDUser = document.reference.id;
             }));
+             final user = User(
+        total_practice_hours: OldHour,
+        number_true_answer: FieldValue.increment(trueAnswerNow),
+        number_false_answer: FieldValue.increment(  falseAnwerNow));
     final docUser = FirebaseFirestore.instance
         .collection('users')
         .doc(docIDUser)
@@ -198,27 +202,24 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
         .doc(MonthTime)
         .collection(MonthTime)
         .doc('Tiếng Anh');
-    final user = User(
-        total_practice_hours: OldHour,
-        number_true_answer: numbertrueAnswer,
-        number_false_answer: numberflaseAnwer);
+   
     final json = user.toJson();
     await docUser.set(json);
   }
-
   @override
   Widget build(BuildContext context) {
     List<ItemModel> _models=widget.listItem;
-    if (_models.length < 25) {
-      time = 15;
-      quantityQ = 20;
-    } else if (_models.length > 45) {
-      time = 60;
-      quantityQ = 50;
-    } else if (_models.length < 45 && _models.length > 30) {
-      time = 50;
-      quantityQ = 40;
-    }
+    quantityQ=_models.length;
+    // if (_models.length < 25) {
+    //   time = 15;
+    //   quantityQ = 20;
+    // } else if (_models.length > 45) {
+    //   time = 60;
+    //   quantityQ = 50;
+    // } else if (_models.length < 45 && _models.length > 30) {
+    //   time = 50;
+    //   quantityQ = 40;
+    // }
     for (int i = 0; i < _models.length; i++) {
       Choose.add('');
     }
@@ -249,13 +250,15 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
     dynamic OldHour = 0;
     dynamic trueAnswer = 0;
     dynamic falseAnwer = 0;
-    List<String?> ListQuestion = [];
-    List<String?> ListTrueAnswer = [];
+    List<String?> listQuestion = [];
+    List<String?> listTrueAnswer = [];
+   
     for (int i = 0; i < _models.length; i++) {
       if (_models[i].falseAnwer1 != '-') {
-        ListQuestion.add(_models[i].question);
-        ListTrueAnswer.add(_models[i].trueAnwer);
+        listQuestion.add(_models[i].question);
+        listTrueAnswer.add(_models[i].trueAnwer);
       }
+     
     }
     return FutureBuilder<User?>(
         future: readDATA(MonthTime, 'Tiếng Anh'),
@@ -287,12 +290,15 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
                     style: TextStyle(fontSize: 30, color: Colors.black),
                   ),
                   onPressed: () {
-                    String timeWorkDone = '${Minutes} : ${Seconds}';
+               DateTime endTime = DateTime.now();
+                Duration difference = endTime.difference(startTime);
+                int seconds = difference.inSeconds;
                     dynamic CWD;
-
-                    _CreatNopBai(quantityQ, snapshot, OldHour, time,_models);
-                    _CreatExercisesDone(
-                        OldHour, trueAnswer, falseAnwer, time, Minutes,_models);
+             
+                   _CreatExercisesDone(
+                        OldHour, trueAnswer, falseAnwer,  seconds,_models);
+                    _CreatNopBai(quantityQ, snapshot, OldHour,  seconds,_models);
+                   
                     // StreamBuilder(
                     //     stream: FirebaseAuth.instance.authStateChanges(),
                     //     builder: (context, snapshot) {
@@ -311,6 +317,17 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
                     //       }
                     //       return CWD;
                     //     });
+                    createWorkDone(
+                                snapshot,
+                                'Tiếng Anh',
+                               seconds.toString(),
+                                chooseF,
+                                listAnwer,
+                                'topic2',
+                                mark,
+                                quantityQ,
+                                listQuestion,
+                                listTrueAnswer);
                   },
                 ),
               ],
@@ -321,6 +338,7 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
                           child: Container(
@@ -334,50 +352,52 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
                                 duration: Duration(milliseconds: 200),
                                 curve: Curves.easeIn);
                           }),
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: TweenAnimationBuilder<Duration>(
-                              duration: Duration(minutes: time),
-                              tween: Tween(
-                                  begin: Duration(minutes: time),
-                                  end: Duration.zero),
-                              onEnd: () {
-                                String timeWorkDone = '${Minutes} : ${Seconds}';
-                                _CreatNopBai(
-                                    quantityQ, snapshot, OldHour, time,_models);
-                                _CreatExercisesDone(OldHour, trueAnswer,
-                                    falseAnwer, time, Minutes,_models);
-                                createWorkDone(
-                                    snapshot,
-                                    'Tiếng Anh',
-                                    timeWorkDone,
-                                    chooseF,
-                                    listAnwer,
-                                    'topic2',
-                                    mark,
-                                    quantityQ,
-                                    ListQuestion,
-                                    ListTrueAnswer);
-                              },
-                              builder: (BuildContext context, Duration value,
-                                  Widget? child) {
-                                final minutes = value.inMinutes;
-                                final seconds = value.inSeconds % 60;
-                                Minutes = minutes;
-                                Seconds = seconds;
-                                return Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: Text('$minutes:$seconds',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 30)));
-                              }),
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     child: TweenAnimationBuilder<Duration>(
+                      //         duration: Duration(minutes: time),
+                      //         tween: Tween(
+                      //             begin: Duration(minutes: time),
+                      //             end: Duration.zero),
+                      //         onEnd: () {
+                      //           String timeWorkDone = '${Minutes} : ${Seconds}';
+                      //           _CreatNopBai(
+                      //               quantityQ, snapshot, OldHour, time,_models);
+                      //           _CreatExercisesDone(OldHour, trueAnswer,
+                      //               falseAnwer, time, Minutes,_models);
+                      //           createWorkDone(
+                      //               snapshot,
+                      //               'Tiếng Anh',
+                      //               timeWorkDone,
+                      //               chooseF,
+                      //               listAnwer,
+                      //               'topic2',
+                      //               mark,
+                      //               quantityQ,
+                      //               ListQuestion,
+                      //               ListTrueAnswer);
+                      //         },
+                      //         // builder: (BuildContext context, Duration value,
+                      //         //     Widget? child) {
+                      //         //   final minutes = value.inMinutes;
+                      //         //   final seconds = value.inSeconds % 60;
+                      //         //   Minutes = minutes;
+                      //         //   Seconds = seconds;
+                      //         //   return Padding(
+                      //         //       padding:
+                      //         //           const EdgeInsets.symmetric(vertical: 5),
+                      //         //       child: Text('$minutes:$seconds',
+                      //         //           textAlign: TextAlign.center,
+                      //         //           style: TextStyle(
+                      //         //               color: Colors.white,
+                      //         //               fontWeight: FontWeight.bold,
+                      //         //               fontSize: 30)));
+                      //         // }
+                              
+                      //         ),
+                      //   ),
+                      // ),
                       InkWell(
                           child: Container(
                             margin: EdgeInsets.only(right: width / 5.1),
@@ -429,7 +449,8 @@ class _QuesionNormalApiModelState extends State<QuesionNormalApiModel> {
                                                     style: TextStyle(
                                                         fontSize: 25,
                                                         fontWeight:
-                                                            FontWeight.bold),
+                                                            FontWeight.bold,),
+                                                              softWrap: true,
                                                   ),
                                                 ),
                                                 Container(

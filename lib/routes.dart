@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travo_app_source/screens/Users/setting_screen.dart';
-import 'package:travo_app_source/screens/Users/users_screen.dart';
+import 'package:travo_app_source/screens/users/setting_screen.dart';
+import 'package:travo_app_source/screens/users/users_screen.dart';
 import 'package:travo_app_source/account/login_screen.dart';
 import 'package:travo_app_source/account/register_screen.dart';
 import 'package:travo_app_source/screens/english12_screen.dart';

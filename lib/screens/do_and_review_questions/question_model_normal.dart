@@ -74,21 +74,22 @@ class _QuesionNormalModelState extends State<QuesionNormalModel> {
       }
     }
     String timeWorkDone = '${Minutes} : ${Seconds}';
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultScreen(
-                  mark: mark,
-                  chooseF: chooseF,
-                  M: Minutes,
-                  S: Seconds,
-                  topic: widget.topic,
-                  quantityQ: quantityQ,
-                  listAnwer: listAnwer,
-                  Choose: Choose,
-                  subject: widget.subject,
-                  time: time,
-                )));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ResultScreen(
+    //               mark: mark,
+    //               chooseF: chooseF,
+    //               M: Minutes,
+    //               S: Seconds,
+    //               topic: widget.topic,
+    //               quantityQ: quantityQ,
+    //               listAnwer: listAnwer,
+    //               Choose: Choose,
+    //               subject: widget.subject,
+    //               time: time,
+             
+    //             )));
   }
 
   _NumberQuesion(int start, int finish) {

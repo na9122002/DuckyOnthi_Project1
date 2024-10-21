@@ -69,21 +69,21 @@ class _QuesionMathModelState extends State<QuesionMathModel> {
       }
     }
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultScreen(
-                  mark: mark,
-                  chooseF: chooseF,
-                  M: Minutes,
-                  S: Seconds,
-                  topic: widget.topic,
-                  quantityQ: quantityQ,
-                  listAnwer: listAnwer,
-                  Choose: Choose,
-                  subject: 'Toán',
-                  time: time,
-                )));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ResultScreen(
+    //               mark: mark,
+    //               chooseF: chooseF,
+    //               M: Minutes,
+    //               S: Seconds,
+    //               topic: widget.topic,
+    //               quantityQ: quantityQ,
+    //               listAnwer: listAnwer,
+    //               Choose: Choose,
+    //               subject: 'Toán',
+    //               time: time,
+    //             )));
     for (int i = 0; i < _models!.length; i++) {
       Choose[i] = '';
     }

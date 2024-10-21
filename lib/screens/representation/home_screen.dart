@@ -3,19 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:travo_app_source/biology/list_question_biology_class12.dart';
-
-import 'package:travo_app_source/chemictry/list_chemistry_class12.dart';
-import 'package:travo_app_source/math_univercity/List_topic_mathUnvercity_Screen.dart';
 import 'package:travo_app_source/network/blocs/question_bloc.dart';
-
 import 'package:travo_app_source/network/models_api/item_api_model.dart';
-
-import 'package:travo_app_source/screens/Screen_English_TS10.dart';
+import 'package:travo_app_source/not_update.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/notUpdate.dart';
+import 'package:travo_app_source/screens/do_and_review_questions/question_api_screen.dart';
 import 'package:travo_app_source/screens/english12_screen.dart';
-import 'package:travo_app_source/screens/question_api_screen.dart';
 
 class AppBarContainerWidget extends StatefulWidget {
   const AppBarContainerWidget({Key? key}) : super(key: key);
@@ -70,15 +63,15 @@ final  bloc = QuestionBloc();
                           ),
                           onTap: () => setState(() {
                            
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => QuesionNormalApiModel(listItem: listItem,)));
-                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            English12Screen()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => QuesionNormalApiModel(listItem: listItem,)));
+                          //  Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (context) =>
+                          //                   English12Screen()));
                           }),
                         ),
                       );
@@ -524,33 +517,6 @@ _readData() async {
               ),
             )
               }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               else{
                 Navigator.push(
                                     context,
