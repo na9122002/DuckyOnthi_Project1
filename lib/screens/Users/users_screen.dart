@@ -17,7 +17,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  dynamic items = ["", "", "", ""];
+  // dynamic items = ["", "", "", ""];
   // _readData() async {
   //   final SharedPreferences prefs = await SharedPreferences.getInstance();
   //   final List<String>? action = prefs.getStringList('items');

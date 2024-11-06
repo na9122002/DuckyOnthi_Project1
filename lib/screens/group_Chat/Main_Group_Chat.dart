@@ -4,10 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/group_chat/Creat_Question.dart';
-import 'package:travo_app_source/screens/group_chat/History_Chat.dart';
-import 'package:travo_app_source/screens/group_chat/Question_Coment.dart';
-import 'package:travo_app_source/models/users_model.dart' as users_model;
+import 'package:travo_app_source/screens/group_chat/creat_question.dart';
+import 'package:travo_app_source/screens/group_chat/history_chat.dart';
+import 'package:travo_app_source/screens/group_chat/question_comment.dart';
 class MainChatScreen extends StatefulWidget {
   const MainChatScreen({Key? key}) : super(key: key);
   @override
@@ -591,36 +590,36 @@ class _MainChatScreenState extends State<MainChatScreen> {
     final docUser2 = FirebaseFirestore.instance.collection('users').doc(docIDs);
     final snapshot2 = await docUser2.get();
     setState(() {
-      UserName = users_model.User.fromJson(snapshot2.data()!).TenDangNhap;
+      UserName = User.fromJson(snapshot2.data()!).TenDangNhap;
     });
   }
 }
 
-// class User {
-//   String id;
-//   final String TenDangNhap;
-//   final String Sodienthoai;
-//   final String email;
-//   final String MatKhau;
-//   User({
-//     this.id = '',
-//     required this.TenDangNhap,
-//     required this.Sodienthoai,
-//     required this.email,
-//     required this.MatKhau,
-//   });
-//   Map<String, dynamic> toJson() => {
-//         'id': id,
-//         'TenDangNhap': TenDangNhap,
-//         'Sodienthoai': Sodienthoai,
-//         'email': email,
-//         'Matkhau': MatKhau,
-//       };
+class User {
+  String id;
+  final String TenDangNhap;
+  final String Sodienthoai;
+  final String email;
+  final String MatKhau;
+  User({
+    this.id = '',
+    required this.TenDangNhap,
+    required this.Sodienthoai,
+    required this.email,
+    required this.MatKhau,
+  });
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'TenDangNhap': TenDangNhap,
+        'Sodienthoai': Sodienthoai,
+        'email': email,
+        'Matkhau': MatKhau,
+      };
 
-//   static User fromJson(Map<String, dynamic> json) => User(
-//       id: json['id'],
-//       TenDangNhap: json['TenDangNhap'],
-//       Sodienthoai: json['Sodienthoai'],
-//       email: json['email'],
-//       MatKhau: json['Matkhau']);
-// }
+  static User fromJson(Map<String, dynamic> json) => User(
+      id: json['id'],
+      TenDangNhap: json['TenDangNhap'],
+      Sodienthoai: json['Sodienthoai'],
+      email: json['email'],
+      MatKhau: json['Matkhau']);
+}
