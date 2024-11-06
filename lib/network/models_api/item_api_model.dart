@@ -1,11 +1,11 @@
 class ItemModel {
-  String? _id;
-  String? id;
-  String? question;
-  String? trueAnwer;
-  String? falseAnwer1;
-  String? falseAnwer2;
-  String? falseAnwer3;
+  dynamic? _id;
+  dynamic? id;
+  dynamic? question;
+  dynamic? trueAnwer;
+  dynamic? falseAnwer1;
+  dynamic? falseAnwer2;
+  dynamic? falseAnwer3;
   
   ItemModel.fromJson(Map<String, dynamic> parsedJson) {
     _id = parsedJson['_id'] ;

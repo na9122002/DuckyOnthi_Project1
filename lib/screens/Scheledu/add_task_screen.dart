@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:travo_app_source/screens/Scheledu/main_scheledu_screen.dart';
+import 'package:travo_app_source/screens/scheledu/main_scheledu_screen.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key, required this.date}) : super(key: key);

@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/group_Chat/Creat_Question.dart';
-import 'package:travo_app_source/screens/group_Chat/History_Chat.dart';
-import 'package:travo_app_source/screens/group_Chat/Question_Coment.dart';
-
+import 'package:travo_app_source/screens/group_chat/Creat_Question.dart';
+import 'package:travo_app_source/screens/group_chat/History_Chat.dart';
+import 'package:travo_app_source/screens/group_chat/Question_Coment.dart';
+import 'package:travo_app_source/models/users_model.dart' as users_model;
 class MainChatScreen extends StatefulWidget {
   const MainChatScreen({Key? key}) : super(key: key);
   @override
@@ -194,60 +194,59 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children:<Widget> [
-                                     Container(
-                                              alignment: Alignment.topLeft,
-                                              height: 70,
-                                              width: 70,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: Colors.white,
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Container(
-                                                    height: 60,
-                                                    width: 60,
-                                                    child: Image.asset(
-                                                      AssetHelper.pika,
-                                                    )),
-                                              )),
-                                    
-                                       Expanded(
-                              
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Container(
+                                            alignment: Alignment.topLeft,
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: Colors.white,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                  height: 60,
+                                                  width: 60,
+                                                  child: Image.asset(
+                                                    AssetHelper.pika,
+                                                  )),
+                                            )),
+                                        Expanded(
                                           child: Column(
-                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 '${snap[index]['userName']}',
                                                 style: TextStyle(
                                                     fontSize: 25,
                                                     color: Colors.black,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                               Text(
-                                            '${snap[index]['ShowTime']}',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black,
-                                            ),
-                                          ),
+                                              Text(
+                                                '${snap[index]['ShowTime']}',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                       
-                                       
-                                    Flexible(
-                                     
+                                        Flexible(
                                           child: PopupMenuButton<SampleItem>(
                                             initialValue: selectedMenu,
-                                            onSelected: (SampleItem item) async {
+                                            onSelected:
+                                                (SampleItem item) async {
                                               dynamic IDUser;
                                               final Users = FirebaseAuth
                                                   .instance.currentUser;
@@ -260,8 +259,8 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                                   .then((snapshot) => snapshot
                                                           .docs
                                                           .forEach((document) {
-                                                        IDUser =
-                                                            document.reference.id;
+                                                        IDUser = document
+                                                            .reference.id;
                                                       }));
                                               await FirebaseFirestore.instance
                                                   .collection('_Group_Chat')
@@ -274,7 +273,8 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                                   .then((snapshot) => snapshot
                                                           .docs
                                                           .forEach((document) {
-                                                        print(document.reference);
+                                                        print(
+                                                            document.reference);
                                                         setState(() {
                                                           docIDPost = document
                                                               .reference.id;
@@ -287,20 +287,23 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                                 Fluttertoast.showToast(
                                                   msg: 'Bạn đã xóa 1 bài viết',
                                                   timeInSecForIosWeb: 1,
-                                                  backgroundColor: Color.fromARGB(
-                                                      255, 3, 2, 2),
+                                                  backgroundColor:
+                                                      Color.fromARGB(
+                                                          255, 3, 2, 2),
                                                 );
                                               } else {
                                                 Fluttertoast.showToast(
                                                   msg:
                                                       'Bạn không thể xóa bài viết của người khác',
                                                   timeInSecForIosWeb: 1,
-                                                  backgroundColor: Color.fromARGB(
-                                                      255, 3, 2, 2),
+                                                  backgroundColor:
+                                                      Color.fromARGB(
+                                                          255, 3, 2, 2),
                                                 );
                                               }
                                             },
-                                            itemBuilder: (BuildContext context) =>
+                                            itemBuilder: (BuildContext
+                                                    context) =>
                                                 <PopupMenuEntry<SampleItem>>[
                                               const PopupMenuItem<SampleItem>(
                                                 value: SampleItem.itemOne,
@@ -434,7 +437,7 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                             .collection('_Group_Chat')
                                             .doc('${dropdownValue}')
                                             .collection('Question_Chat')
-                                            .doc('${DocumentIDcomment[index]}')
+                                            .doc('S79ktEHEOzHuWVf3cNNK')
                                             .collection('comment')
                                             .snapshots(),
                                         builder: (BuildContext context,
@@ -442,14 +445,15 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                                 snapshot1) {
                                           if (snapshot1.hasData) {
                                             final snap1 = snapshot1.data!.docs;
-                                    
+
                                             return Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 22, left: 22),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 22, left: 22),
                                                   child: Container(
                                                     // decoration: BoxDecoration(
                                                     //   border: Border(
@@ -458,78 +462,81 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                                     //         color: Colors.black),
                                                     //   ),
                                                     // ),
-                                                    child:       Container(
-                                                            width: width / 3,
-                                                            child: InkWell(
-                                                              child: Row(
-                                                                children: [
-                                                                  Icon(
-                Icons.comment,
-                size: 40, // Kích thước của biểu tượng
-                 // Màu sắc của biểu tượng
-              ),
-              SizedBox(
-                width: 5, // Khoảng cách giữa các phần tử
-              ),
-                                                                  Text(
-                                                                    '${snap1.length}',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            25,color: Colors.black),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              onTap: () async {
-                                                                dynamic
-                                                                    docIDDelete;
-                                                                await FirebaseFirestore
-                                                                    .instance
-                                                                    .collection(
-                                                                        '_Group_Chat')
-                                                                    .doc(
-                                                                        '${dropdownValue}')
-                                                                    .collection(
-                                                                        'Question_Chat')
-                                                                    .where('time',
-                                                                        isEqualTo:
-                                                                            '${snap[index]['time']}')
-                                                                    .get()
-                                                                    .then((snapshot) =>
-                                                                        snapshot
-                                                                            .docs
-                                                                            .forEach(
-                                                                                (document) {
-                                                                          print(document
-                                                                              .reference);
-                                    
-                                                                          docIDDelete = document
-                                                                              .reference
-                                                                              .id;
-                                                                        }));
-                                    
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            QuestionAndComentScreen(
-                                                                              timeShow:
-                                                                                  snap[index]['ShowTime'],
-                                                                              content:
-                                                                                  snap[index]['content'],
-                                                                              image:
-                                                                                  snap[index]['image'],
-                                                                              userNamePost:
-                                                                                  snap[index]['userName'],
-                                                                              IDquestion:
-                                                                                  DocumentIDcomment[index],
-                                                                              dropdownValue:
-                                                                                  dropdownValue,
-                                                                              IDUser:
-                                                                                  snap[index]['IDUser'],
-                                                                            )));
-                                                              },
+                                                    child: Container(
+                                                      width: width / 3,
+                                                      child: InkWell(
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.comment,
+                                                              size:
+                                                                  40, // Kích thước của biểu tượng
+                                                              // Màu sắc của biểu tượng
                                                             ),
-                                                          ),
+                                                            SizedBox(
+                                                              width:
+                                                                  5, // Khoảng cách giữa các phần tử
+                                                            ),
+                                                            Text(
+                                                              '${snap1.length}',
+                                                              style: TextStyle(
+                                                                  fontSize: 25,
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        onTap: () async {
+                                                          dynamic docIDDelete;
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  '_Group_Chat')
+                                                              .doc(
+                                                                  '${dropdownValue}')
+                                                              .collection(
+                                                                  'Question_Chat')
+                                                              .where('time',
+                                                                  isEqualTo:
+                                                                      '${snap[index]['time']}')
+                                                              .get()
+                                                              .then((snapshot) =>
+                                                                  snapshot.docs
+                                                                      .forEach(
+                                                                          (document) {
+                                                                    print(document
+                                                                        .reference);
+
+                                                                    docIDDelete =
+                                                                        document
+                                                                            .reference
+                                                                            .id;
+                                                                  }));
+
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          QuestionAndComentScreen(
+                                                                            timeShow:
+                                                                                snap[index]['ShowTime'],
+                                                                            content:
+                                                                                snap[index]['content'],
+                                                                            image:
+                                                                                snap[index]['image'],
+                                                                            userNamePost:
+                                                                                snap[index]['userName'],
+                                                                            IDquestion:
+                                                                                DocumentIDcomment[index],
+                                                                            dropdownValue:
+                                                                                dropdownValue,
+                                                                            IDUser:
+                                                                                snap[index]['IDUser'],
+                                                                          )));
+                                                        },
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -584,35 +591,36 @@ class _MainChatScreenState extends State<MainChatScreen> {
     final docUser2 = FirebaseFirestore.instance.collection('users').doc(docIDs);
     final snapshot2 = await docUser2.get();
     setState(() {
-      UserName = User.fromJson(snapshot2.data()!).username;
+      UserName = users_model.User.fromJson(snapshot2.data()!).TenDangNhap;
     });
   }
 }
 
-class User {
-  String id;
-  final String username;
-  final String mobile;
-  final String email;
-  final String password;
-  User({
-    this.id = '',
-    required this.username,
-    required this.mobile,
-    required this.email,
-    required this.password,
-  });
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'username': username,
-        'mobile': mobile,
-        'email': email,
-        'password': password,
-      };
-  static User fromJson(Map<String, dynamic> json) => User(
-      id: json['id'],
-      username: json['username'],
-      mobile: json['mobile'],
-      email: json['email'],
-      password: json['password']);
-}
+// class User {
+//   String id;
+//   final String TenDangNhap;
+//   final String Sodienthoai;
+//   final String email;
+//   final String MatKhau;
+//   User({
+//     this.id = '',
+//     required this.TenDangNhap,
+//     required this.Sodienthoai,
+//     required this.email,
+//     required this.MatKhau,
+//   });
+//   Map<String, dynamic> toJson() => {
+//         'id': id,
+//         'TenDangNhap': TenDangNhap,
+//         'Sodienthoai': Sodienthoai,
+//         'email': email,
+//         'Matkhau': MatKhau,
+//       };
+
+//   static User fromJson(Map<String, dynamic> json) => User(
+//       id: json['id'],
+//       TenDangNhap: json['TenDangNhap'],
+//       Sodienthoai: json['Sodienthoai'],
+//       email: json['email'],
+//       MatKhau: json['Matkhau']);
+// }

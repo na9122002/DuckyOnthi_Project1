@@ -81,7 +81,7 @@ class _MainWorkDoneScreenState extends State<MainWorkDoneScreen> {
                         TableCell(
                           verticalAlignment: TableCellVerticalAlignment.middle,
                           child: Text(
-                            "${snap[index]['Time']}/${snap[index]['TotalTime']}",
+                            "${snap[index]['Time']} giây",
                             textScaleFactor: 1,
                           ),
                         ),

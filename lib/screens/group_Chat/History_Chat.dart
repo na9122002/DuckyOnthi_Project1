@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/group_Chat/Main_Group_Chat.dart';
-import 'package:travo_app_source/screens/group_Chat/Question_Coment.dart';
+import 'package:travo_app_source/screens/group_chat/Main_Group_Chat.dart';
+import 'package:travo_app_source/screens/group_chat/Question_Coment.dart';
 class HistoryChatSceen extends StatefulWidget {
   const HistoryChatSceen({Key? key}) : super(key: key);
   @override

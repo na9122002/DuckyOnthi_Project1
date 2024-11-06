@@ -4,7 +4,8 @@ import 'package:travo_app_source/light_and_dark.dart/change_theme_button_widget.
 import 'package:travo_app_source/light_and_dark.dart/theme_provider.dart';
 import 'package:travo_app_source/math_univercity/readData.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/notUpdate.dart';
+import 'package:travo_app_source/not_update.dart';
+
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);

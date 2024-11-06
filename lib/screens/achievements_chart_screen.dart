@@ -264,80 +264,80 @@ class _AchievementChartScreenState extends State<AchievementChartScreen> {
             'Thời gian thông kê : ${_selectedValue}',
             style: TextStyle(fontFamily: AutofillHints.location, fontSize: 20),
           ),
-          Text(
-            'Số phút luyện tập',
-            style: styleTitle,
-          ),
-          StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(docIDs)
-                  .collection('Achievement_Board')
-                  .doc(_selectedValue)
-                  .collection(_selectedValue)
-                  .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  final snap = snapshot.data!.docs;
-                  List idSubject = [];
-                  List idSnap = [];
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: 1,
-                      itemBuilder: (context, index) {
-                        for (int i = 0; i < 9; i++) {
-                          ListData[i][0] = 0.0;
-                          ListData[i][1] = 0.0;
-                          ListData[i][2] = 0.0;
-                        }
-                        for (int i = 0; i < 9; i++) {
-                          for (int k = 0; k < snap.length; k++) {
-                            if (subject[i] == snap[k].id) {
-                              idSubject.add(i);
-                              idSnap.add(k);
-                            }
-                          }
-                        }
-                        for (int i = 0; i < snap.length; i++) {
-                          double Time = snap[idSnap[i]]
-                                  ['total_practice_hours'] *
-                              100 /
-                              100;
-                          ListData[idSubject[i]][0] = snap[idSnap[i]]
-                                  ['total_practice_hours'] *
-                              100 /
-                              100;
-                        }
-                        List<double> ListTime = [
-                          ListData[0][0],
-                          ListData[1][0],
-                          ListData[2][0],
-                          ListData[3][0],
-                          ListData[4][0],
-                          ListData[5][0],
-                          ListData[6][0],
-                          ListData[7][0],
-                          ListData[8][0]
-                        ];
-                        return Container(height: 250, child: _Time(ListTime));
-                      });
-                } else {
-                  List<double> ListTime = [
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                  ];
-                  return Container(height: 250, child: _Time(ListTime));
-                }
-              }),
+          // Text(
+          //   'Số phút luyện tập',
+          //   style: styleTitle,
+          // ),
+          // StreamBuilder<QuerySnapshot>(
+          //     stream: FirebaseFirestore.instance
+          //         .collection('users')
+          //         .doc(docIDs)
+          //         .collection('Achievement_Board')
+          //         .doc(_selectedValue)
+          //         .collection(_selectedValue)
+          //         .snapshots(),
+          //     builder: (BuildContext context,
+          //         AsyncSnapshot<QuerySnapshot> snapshot) {
+          //       if (snapshot.hasData) {
+          //         final snap = snapshot.data!.docs;
+          //         List idSubject = [];
+          //         List idSnap = [];
+          //         return ListView.builder(
+          //             shrinkWrap: true,
+          //             primary: false,
+          //             itemCount: 1,
+          //             itemBuilder: (context, index) {
+          //               for (int i = 0; i < 9; i++) {
+          //                 ListData[i][0] = 0.0;
+          //                 ListData[i][1] = 0.0;
+          //                 ListData[i][2] = 0.0;
+          //               }
+          //               for (int i = 0; i < 9; i++) {
+          //                 for (int k = 0; k < snap.length; k++) {
+          //                   if (subject[i] == snap[k].id) {
+          //                     idSubject.add(i);
+          //                     idSnap.add(k);
+          //                   }
+          //                 }
+          //               }
+          //               for (int i = 0; i < snap.length; i++) {
+          //                 double Time = snap[idSnap[i]]
+          //                         ['total_practice_hours'] *
+          //                     100 /
+          //                     100;
+          //                 ListData[idSubject[i]][0] = snap[idSnap[i]]
+          //                         ['total_practice_hours'] *
+          //                     100 /
+          //                     100;
+          //               }
+          //               List<double> ListTime = [
+          //                 ListData[0][0],
+          //                 ListData[1][0],
+          //                 ListData[2][0],
+          //                 ListData[3][0],
+          //                 ListData[4][0],
+          //                 ListData[5][0],
+          //                 ListData[6][0],
+          //                 ListData[7][0],
+          //                 ListData[8][0]
+          //               ];
+          //               return Container(height: 250, child: _Time(ListTime));
+          //             });
+          //       } else {
+          //         List<double> ListTime = [
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0,
+          //           0.0
+          //         ];
+          //         return Container(height: 250, child: _Time(ListTime));
+          //       }
+          //     }),
           Text(
             'Số câu đã làm',
             style: styleTitle,
@@ -411,21 +411,21 @@ class _AchievementChartScreenState extends State<AchievementChartScreen> {
                   return Container(height: 250, child: _DoneQuesion(ListQ));
                 }
               }),
-          Container(
-            child: Column(
-              children: [
-                _colorSubject('Toán', Colors.red),
-                _colorSubject('Tiếng Anh', Color.fromARGB(255, 255, 170, 199)),
-                _colorSubject('Ngữ Văn', Colors.grey),
-                _colorSubject('Lịch Sử', Colors.green),
-                _colorSubject('Đại Lý', Colors.purple),
-                _colorSubject('Vật Lý', Colors.yellow),
-                _colorSubject('Hóa Học', Colors.orange),
-                _colorSubject('Sinh Học', Colors.amber),
-                _colorSubject('Công dân', Colors.blue),
-              ],
-            ),
-          ),
+          // Container(
+          //   child: Column(
+          //     children: [
+          //       _colorSubject('Toán', Colors.red),
+          //       _colorSubject('Tiếng Anh', Color.fromARGB(255, 255, 170, 199)),
+          //       _colorSubject('Ngữ Văn', Colors.grey),
+          //       _colorSubject('Lịch Sử', Colors.green),
+          //       _colorSubject('Đại Lý', Colors.purple),
+          //       _colorSubject('Vật Lý', Colors.yellow),
+          //       _colorSubject('Hóa Học', Colors.orange),
+          //       _colorSubject('Sinh Học', Colors.amber),
+          //       _colorSubject('Công dân', Colors.blue),
+          //     ],
+          //   ),
+          // ),
           StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('users')

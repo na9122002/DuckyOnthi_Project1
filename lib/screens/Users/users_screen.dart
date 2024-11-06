@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travo_app_source/light_and_dark.dart/change_theme_button_widget.dart';
-import 'package:travo_app_source/screens/Scheledu/main_scheledu_screen.dart';
-import 'package:travo_app_source/screens/achievements_chart_screen.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/notUpdate.dart';
+import 'package:travo_app_source/light_and_dark.dart/change_theme_button_widget.dart';
+import 'package:travo_app_source/not_update.dart';
+import 'package:travo_app_source/screens/scheledu/main_scheledu_screen.dart';
+import 'package:travo_app_source/screens/achievements_chart_screen.dart';
 import 'package:travo_app_source/screens/work_done/main_work_done_screen.dart';
 
 class UserScreen extends StatefulWidget {
@@ -18,15 +18,15 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   dynamic items = ["", "", "", ""];
-  _readData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? action = prefs.getStringList('items');
-    items = action!;
-  }
+  // _readData() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final List<String>? action = prefs.getStringList('items');
+  //   items = action!;
+  // }
 
-  void initState() {
-    _readData();
-  }
+  // void initState() {
+  //   _readData();
+  // }
 
   _notUpDate(String function) {
     Navigator.push(

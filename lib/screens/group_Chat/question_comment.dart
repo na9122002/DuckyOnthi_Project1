@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/group_Chat/Main_Group_Chat.dart';
+import 'package:travo_app_source/screens/group_chat/Main_Group_Chat.dart';
 import 'package:travo_app_source/screens/representation/bottom_navigation_bar.dart';
 
 class QuestionAndComentScreen extends StatefulWidget {
