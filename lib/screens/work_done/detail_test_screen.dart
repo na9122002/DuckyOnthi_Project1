@@ -191,36 +191,6 @@ class _DetailTestScreenState extends State<DetailTestScreen> {
                   Text('Trả lời sai')
                 ],
               ),
-              // Column(
-              //   children: [
-              //     Container(
-              //       height: 50,
-              //       width: 50,
-              //       margin: EdgeInsets.only(right: 10, left: 14, top: 8),
-              //       decoration: BoxDecoration(
-              //         color: Colors.white,
-              //         borderRadius: BorderRadius.circular(10),
-              //         border: Border(
-              //           top: BorderSide(width: 5, color: Colors.grey),
-              //           left: BorderSide(width: 5, color: Colors.grey),
-              //           right: BorderSide(width: 5, color: Colors.grey),
-              //           bottom: BorderSide(width: 5, color: Colors.grey),
-              //         ),
-              //       ),
-              //       child: Container(
-              //         alignment: Alignment.center,
-              //         child: Text(
-              //           '${widget.NumberAnswer - widget.TrueAnswer - widget.falseAnwer}',
-              //           style: TextStyle(
-              //               color: Colors.grey,
-              //               fontSize: 30,
-              //               fontWeight: FontWeight.w800),
-              //         ),
-              //       ),
-              //     ),
-              //     Text('Câu bỏ qua')
-              //   ],
-              // ),
             ],
           ),
           SizedBox(

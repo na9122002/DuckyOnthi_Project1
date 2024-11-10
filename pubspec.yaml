@@ -54,7 +54,7 @@ dependencies:
   fluttertoast: ^8.2.1
   uuid: ^3.0.7
   marquee: ^2.2.3
-  awesome_notifications: ^0.7.4+1
+  # awesome_notifications: ^0.7.4+1
   # dio: ^3.0.10
   # enum_to_string: ^1.0.14
   # equatable: ^1.2.6

@@ -5,9 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
 import 'package:travo_app_source/light_and_dark.dart/change_theme_button_widget.dart';
 import 'package:travo_app_source/not_update.dart';
-import 'package:travo_app_source/screens/scheledu/main_scheledu_screen.dart';
+import 'package:travo_app_source/screens/scheledu/main_scheledu/main_scheledu_screen.dart';
 import 'package:travo_app_source/screens/achievements_chart_screen.dart';
 import 'package:travo_app_source/screens/work_done/main_work_done_screen.dart';
+import 'package:travo_app_source/models/users_model.dart' as users_model;
+import 'package:travo_app_source/widget/inwell_users.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -17,17 +19,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  // dynamic items = ["", "", "", ""];
-  // _readData() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final List<String>? action = prefs.getStringList('items');
-  //   items = action!;
-  // }
-
-  // void initState() {
-  //   _readData();
-  // }
-
   _notUpDate(String function) {
     Navigator.push(
         context,
@@ -46,7 +37,7 @@ class _UserScreenState extends State<UserScreen> {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-    return FutureBuilder<User?>(
+    return FutureBuilder<users_model.User?>(
         future: readUser(),
         builder: (context, snapshot) {
           final user = snapshot.data;
@@ -81,7 +72,7 @@ class _UserScreenState extends State<UserScreen> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('Chào ${user?.TenDangNhap}',
+                            Text('Chào ${user?.username}',
                                 style: TextStyle(
                                     fontSize: 25, fontWeight: FontWeight.bold)),
                           ],
@@ -103,33 +94,9 @@ class _UserScreenState extends State<UserScreen> {
                     childAspectRatio: 2,
                   ),
                   children: [
-                    InkWell(
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                                height: 45,
-                                child: Image.asset(AssetHelper.bai_da_lam)),
-                            Text('Bài đã\n làm',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black)),
-                          ],
-                        ),
-                      ),
+                    InwellUsers(
+                      image: AssetHelper.bai_da_lam,
+                      label: 'Bài đã\n làm',
                       onTap: () async {
                         dynamic docIDs;
                         final Users = FirebaseAuth.instance.currentUser;
@@ -150,98 +117,19 @@ class _UserScreenState extends State<UserScreen> {
                                     )));
                       },
                     ),
-
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                                height: 45,
-                                child:
-                                    Image.asset(AssetHelper.bang_thanh_tich)),
-                            Text('Bảng thành \n tích',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black)),
-                          ],
-                        ),
-                      ),
+                    InwellUsers(
+                      image: AssetHelper.bang_thanh_tich,
+                      label: 'Bảng thành \n tích',
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    AchievementChartScreen()));
+                                builder: (contex) => AchievementChartScreen()));
                       },
                     ),
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     borderRadius: BorderRadius.circular(20),
-                    //     boxShadow: const [
-                    //       BoxShadow(
-                    //         color: Colors.black,
-                    //         offset: Offset(2, 2),
-                    //         blurRadius: 10,
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: Row(
-                    //     children: [
-                    //       Container(
-                    //           height: 45,
-                    //           child:
-                    //               Image.asset(AssetHelper.cai_dat_nguoi_dung)),
-                    //       TextButton(
-                    //         child: Text('Cài đặt \nngười dùng',
-                    //             style: TextStyle(
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.w600,
-                    //                 color: Colors.black)),
-                    //         onPressed: () {},
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                                height: 45,
-                                child: Image.asset(
-                                    AssetHelper.bang_nho_hang_tuan)),
-                            Text('Tạo lập\n lịch trình',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black)),
-                          ],
-                        ),
-                      ),
+                    InwellUsers(
+                      image: AssetHelper.bang_nho_hang_tuan,
+                      label: 'Tạo lập\n lịch trình',
                       onTap: () {
                         Navigator.push(
                             context,
@@ -249,105 +137,32 @@ class _UserScreenState extends State<UserScreen> {
                                 builder: (context) => MainScheleduScreen()));
                       },
                     ),
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     borderRadius: BorderRadius.circular(20),
-                    //     boxShadow: const [
-                    //       BoxShadow(
-                    //         color: Colors.black,
-                    //         offset: Offset(2, 2),
-                    //         blurRadius: 10,
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: Row(
-                    //     children: [
-                    //       Container(
-                    //           height: 45,
-                    //           child: Image.asset(AssetHelper.thong_bao)),
-                    //       TextButton(
-                    //         child: Text('Thông báo',
-                    //             style: TextStyle(
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.w600,
-                    //                 color: Colors.black)),
-                    //         onPressed: () {},
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-  
-
-
-
-
-
-
-
-
-
- Container(
-            decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-            child: ListTile(
-              title: Text(
-                'Sáng tối 🌗',
-               style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-              ),
-              trailing: ChangeThemeButtonWidget(),
-            ),
-          ),
-
-
-
-
-
-
-
-
-
-
-
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                                height: 45,
-                                child: Image.asset(
-                                    AssetHelper.logout_icon_removebg_preview)),
-                            Text('Đăng xuất',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black)),
-                          ],
-                        ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black,
+                            offset: Offset(2, 2),
+                            blurRadius: 10,
+                          ),
+                        ],
                       ),
+                      child: ListTile(
+                        title: Text(
+                          'Sáng tối 🌗',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        trailing: ChangeThemeButtonWidget(),
+                      ),
+                    ),
+                    InwellUsers(
+                      image: AssetHelper.logout_icon_removebg_preview,
+                      label: 'Đăng xuất',
                       onTap: () {
                         FirebaseAuth.instance.signOut();
                       },
@@ -360,13 +175,8 @@ class _UserScreenState extends State<UserScreen> {
         });
   }
 }
-// Stream<List<User>> readUsers() => FirebaseFirestore.instance
-//     .collection('users')
-//     .snapshots()
-//     .map((snapshot) =>
-//         snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
 
-Future<User?> readUser() async {
+Future<users_model.User?> readUser() async {
   dynamic docIDs;
   final Users = FirebaseAuth.instance.currentUser;
   await FirebaseFirestore.instance
@@ -379,125 +189,5 @@ Future<User?> readUser() async {
           }));
   final docUser = FirebaseFirestore.instance.collection('users').doc(docIDs);
   final snapshot = await docUser.get();
-  return User.fromJson(snapshot.data()!);
+  return users_model.User.fromJson(snapshot.data()!);
 }
-
-class User {
-  String id;
-  final String TenDangNhap;
-  final String Sodienthoai;
-  final String email;
-  final String MatKhau;
-  User({
-    this.id = '',
-    required this.TenDangNhap,
-    required this.Sodienthoai,
-    required this.email,
-    required this.MatKhau,
-  });
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'TenDangNhap': TenDangNhap,
-        'Sodienthoai': Sodienthoai,
-        'email': email,
-        'Matkhau': MatKhau,
-      };
-  static User fromJson(Map<String, dynamic> json) => User(
-      id: json['id'],
-      TenDangNhap: json['TenDangNhap'],
-      Sodienthoai: json['Sodienthoai'],
-      email: json['email'],
-      MatKhau: json['Matkhau']);
-}
-
-
-
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:travo_app_source/LightAndDark.dart/theme_provider.dart';
-// import 'package:travo_app_source/notUpdate.dart';
-
-// class SettingScreen extends StatefulWidget {
-//   const SettingScreen({Key? key}) : super(key: key);
-//   static String routeName = "SettingScreen";
-//   @override
-//   State<SettingScreen> createState() => _SettingScreenState();
-// }
-
-// class _SettingScreenState extends State<SettingScreen> {
-//   bool light1 = true;
-//   bool light2 = true;
-//   _notUpDate(String function) {
-//     Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//             builder: (context) => OthersubjectScreen(
-//                   subject: function,
-//                 )));
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-//         ? 'DarkTheme'
-//         : 'LightTheme';
-//     return Scaffold(
-//         body: SingleChildScrollView(
-//             child: Column(
-//       children: [
-//         SizedBox(
-//           height: 30,
-//         ),
-//         Text(
-//           'Cài đặt người dùng',
-//           style: TextStyle(fontSize: 30),
-//         ),
-//         Container(
-//           height: 500,
-//           child: GridView(
-//             physics: NeverScrollableScrollPhysics(),
-//             shrinkWrap: true,
-//             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//               crossAxisCount: 2,
-//             ),
-//             children: [
-//               Container(
-//                 decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.circular(20),
-//                   boxShadow: const [
-//                     BoxShadow(
-//                       color: Colors.black,
-//                       offset: Offset(2, 2),
-//                       blurRadius: 10,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//                Container(
-//                 decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.circular(20),
-//                   boxShadow: const [
-//                     BoxShadow(
-//                       color: Colors.black,
-//                       offset: Offset(2, 2),
-//                       blurRadius: 10,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         )
-//       ],
-//     )));
-//   }
-// }

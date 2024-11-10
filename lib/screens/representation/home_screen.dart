@@ -7,8 +7,7 @@ import 'package:travo_app_source/network/blocs/question_bloc.dart';
 import 'package:travo_app_source/network/models_api/item_api_model.dart';
 import 'package:travo_app_source/not_update.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
-import 'package:travo_app_source/screens/do_and_review_questions/question_api_screen.dart';
-import 'package:travo_app_source/screens/english12_screen.dart';
+import 'package:travo_app_source/screens/do_and_review_questions/question/question_api_screen.dart';
 
 class AppBarContainerWidget extends StatefulWidget {
   const AppBarContainerWidget({Key? key}) : super(key: key);
@@ -23,187 +22,162 @@ final Shader linearGradient = LinearGradient(
 
 class _AppBarContainerWidgetState extends State<AppBarContainerWidget> {
   dynamic items = [];
-  
-   
 
+  _special_exam() {
+    final bloc = QuestionBloc();
+    bloc.fetchAllQuestion();
+    return StreamBuilder(
+      stream: bloc.allQuestion,
+      builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
+        if (snapshot.hasData) {
+          final listItem = snapshot.data ?? [];
+          return Container(
+            alignment: Alignment.center,
+            child: InkWell(
+              child: Container(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 16, right: 7, bottom: 33),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 189, 189, 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                height: 50,
+                width: 190,
+              ),
+              onTap: () => setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => QuesionNormalApiModel(
+                              listItem: listItem,
+                            )));
+                //  Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) =>
+                //                   English12Screen()));
+              }),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
 
+  _special_chemictry_exam() {
+    final bloc = QuestionBloc();
+    bloc.fetchAllChemictryQuestion();
+    return StreamBuilder(
+      stream: bloc.allChemictryQuestion,
+      builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
+        if (snapshot.hasData) {
+          final listItem = snapshot.data ?? [];
+          return Container(
+            alignment: Alignment.center,
+            child: InkWell(
+              child: Container(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 16, right: 7, bottom: 33),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 189, 189, 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                height: 50,
+                width: 190,
+              ),
+              onTap: () => setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => QuesionNormalApiModel(
+                              listItem: listItem,
+                            )));
+              }),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
 
-_special_exam(){
-    
-final  bloc = QuestionBloc();
- bloc.fetchAllQuestion();
- return  StreamBuilder(
-                
-          stream: bloc.allQuestion,
-          builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
-            if (snapshot.hasData) {
-              final listItem = snapshot.data ?? [];
-              return  Container(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          child: Container(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            margin:
-                                EdgeInsets.only(top: 16, right: 7, bottom: 33),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 189, 189, 1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            height: 50,
-                            width: 190,
-                          ),
-                          onTap: () => setState(() {
-                           
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => QuesionNormalApiModel(listItem: listItem,)));
-                          //  Navigator.push(
-                          //           context,
-                          //           MaterialPageRoute(
-                          //               builder: (context) =>
-                          //                   English12Screen()));
-                          }),
-                        ),
-                      );
-            } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        );
-}
+  _special_biology_exam() {
+    final bloc = QuestionBloc();
+    bloc.fetchAllBiologyQuestion();
+    return StreamBuilder(
+      stream: bloc.allBiologyQuestion,
+      builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
+        if (snapshot.hasData) {
+          final listItem = snapshot.data ?? [];
+          return Container(
+            alignment: Alignment.center,
+            child: InkWell(
+              child: Container(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 16, right: 7, bottom: 33),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 189, 189, 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                height: 50,
+                width: 190,
+              ),
+              onTap: () => setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => QuesionNormalApiModel(
+                              listItem: listItem,
+                            )));
+              }),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
 
-
-_special_chemictry_exam(){
-    
-final  bloc = QuestionBloc();
- bloc.fetchAllChemictryQuestion();
- return  StreamBuilder(
-                
-          stream: bloc.allChemictryQuestion,
-          builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
-            if (snapshot.hasData) {
-              final listItem = snapshot.data ?? [];
-              return  Container(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          child: Container(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            margin:
-                                EdgeInsets.only(top: 16, right: 7, bottom: 33),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 189, 189, 1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            height: 50,
-                            width: 190,
-                          ),
-                          onTap: () => setState(() {
-                           
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => QuesionNormalApiModel(listItem: listItem,)));
-                           
-                          }),
-                        ),
-                      );
-            } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        );
-}
-_special_biology_exam(){
-    
-final  bloc = QuestionBloc();
- bloc.fetchAllBiologyQuestion();
- return  StreamBuilder(          
-          stream: bloc.allBiologyQuestion,
-          builder: (context, AsyncSnapshot<List<ItemModel>> snapshot) {
-            if (snapshot.hasData) {
-              final listItem = snapshot.data ?? [];
-              return  Container(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          child: Container(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Nhấp vào để thi 💪🏿️🎉️🎊️🎯',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            margin:
-                                EdgeInsets.only(top: 16, right: 7, bottom: 33),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 189, 189, 1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            height: 50,
-                            width: 190,
-                          ),
-                          onTap: () => setState(() {
-                           
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => QuesionNormalApiModel(listItem: listItem,)));
-                           
-                          }),
-                        ),
-                      );
-            } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-_readData() async {
+  _readData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getStringList('items') != null) {
       final List<String> action = prefs.getStringList('items')!;
       setState(() {
         items = action;
-
       });
     }
   }
@@ -211,12 +185,10 @@ _readData() async {
   @override
   void initState() {
     _readData();
-   
   }
 
   var size, height, width;
   DropdownMenuItem<String> buildMenuItem(String item) {
-       
     return DropdownMenuItem<String>(
       value: item,
       child: Text(
@@ -230,170 +202,154 @@ _readData() async {
   }
 
   _floatbutton(String images, String subject, dynamic Height) {
-
     return Expanded(
       child: Column(
         children: [
           InkWell(
-            child: Container(
-              width: Height / 7.76,
-              height: Height / 7.76,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 189, 189, 1),
-                borderRadius: BorderRadius.circular(20),
-              ),
               child: Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: height / 90,
-                    ),
-                    Container(
-                      child: Image.asset(images),
-                    ),
-                    SizedBox(
-                      height: height / 92,
-                    ),
-                    Text(
-                      subject,
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ],
+                width: Height / 7.76,
+                height: Height / 7.76,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 189, 189, 1),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ),
-            ),
-           
-            onTap: () => {
-              if(subject=='Tiếng Anh'){
-                 showDialog<String>(
-               
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                backgroundColor: Colors.black,
-                actions: <Widget>[
-                  
-                 
-                  Column(
-                 
+                child: Container(
+                  child: Column(
                     children: [
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // Center(
-                      //   child: const Text('Chọn chương trình học',
-                      //       style: TextStyle(
-                      //           color: Color.fromARGB(255, 249, 247, 247),
-                      //           fontSize: 20,
-                      //           fontWeight: FontWeight.bold)),
-                      // ),
-                      // SizedBox(
-                      //   height: 15,
-                      // ),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   child: InkWell(
-                      //       child: Container(
-                      //         child: Container(
-                      //           alignment: Alignment.center,
-                      //           child: Text(
-                      //             'Ôn thi THPT Quốc Gia',
-                      //             style: TextStyle(
-                      //                 color: Color.fromRGBO(0, 0, 0, 1),
-                      //                 fontSize: 14,
-                      //                 fontWeight: FontWeight.bold),
-                      //           ),
-                      //         ),
-                      //         decoration: BoxDecoration(
-                      //           color: Color.fromRGBO(255, 189, 189, 1),
-                      //           borderRadius: BorderRadius.circular(20),
-                      //         ),
-                      //         height: 50,
-                      //         width: 190,
-                      //       ),
-                      //       onTap: () {
-                             
-                      //           Navigator.push(
-                      //               context,
-                      //               MaterialPageRoute(
-                      //                   builder: (context) =>
-                      //                       English12Screen()));
-                          
-                             
-
-                      //         // else if (subject == 'Toán') {
-                      //         //   Navigator.push(
-                      //         //       context,
-                      //         //       MaterialPageRoute(
-                      //         //           builder: (context) => Math10Screen()));
-                      //         // }
-                           
-                      //       }),
-                      // ),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   child: InkWell(
-                      //     child: Container(
-                      //       child: Container(
-                      //         alignment: Alignment.center,
-                      //         child: Text(
-                      //           'Ôn thi tuyển sinh lớp 10',
-                      //           style: TextStyle(
-                      //               color: Color.fromRGBO(0, 0, 0, 1),
-                      //               fontSize: 14,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //       ),
-                      //       margin:
-                      //           EdgeInsets.only(top: 16, right: 7, bottom: 33),
-                      //       decoration: BoxDecoration(
-                      //         color: Color.fromRGBO(255, 189, 189, 1),
-                      //         borderRadius: BorderRadius.circular(20),
-                      //       ),
-                      //       height: 50,
-                      //       width: 190,
-                      //     ),
-                      //     onTap: () => setState(() {
-                           
-                      //         Navigator.push(
-                      //             context,
-                      //             MaterialPageRoute(
-                      //                 builder: (context) => English10Screen()));
-                          
-                      //     }),
-                      //   ),
-                      // ),
-
- 
-      _special_exam()
-
-                       
+                      SizedBox(
+                        height: height / 90,
+                      ),
+                      Container(
+                        child: Image.asset(images),
+                      ),
+                      SizedBox(
+                        height: height / 92,
+                      ),
+                      Text(
+                        subject,
+                        style: TextStyle(fontSize: 15, color: Colors.black),
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
-            )
-              }
+              onTap: () => {
+                    if (subject == 'Tiếng Anh')
+                      {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            backgroundColor: Colors.black,
+                            actions: <Widget>[
+                              Column(
+                                children: [
+                                  // SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  // Center(
+                                  //   child: const Text('Chọn chương trình học',
+                                  //       style: TextStyle(
+                                  //           color: Color.fromARGB(255, 249, 247, 247),
+                                  //           fontSize: 20,
+                                  //           fontWeight: FontWeight.bold)),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 15,
+                                  // ),
+                                  // Container(
+                                  //   alignment: Alignment.center,
+                                  //   child: InkWell(
+                                  //       child: Container(
+                                  //         child: Container(
+                                  //           alignment: Alignment.center,
+                                  //           child: Text(
+                                  //             'Ôn thi THPT Quốc Gia',
+                                  //             style: TextStyle(
+                                  //                 color: Color.fromRGBO(0, 0, 0, 1),
+                                  //                 fontSize: 14,
+                                  //                 fontWeight: FontWeight.bold),
+                                  //           ),
+                                  //         ),
+                                  //         decoration: BoxDecoration(
+                                  //           color: Color.fromRGBO(255, 189, 189, 1),
+                                  //           borderRadius: BorderRadius.circular(20),
+                                  //         ),
+                                  //         height: 50,
+                                  //         width: 190,
+                                  //       ),
+                                  //       onTap: () {
 
+                                  //           Navigator.push(
+                                  //               context,
+                                  //               MaterialPageRoute(
+                                  //                   builder: (context) =>
+                                  //                       English12Screen()));
 
+                                  //         // else if (subject == 'Toán') {
+                                  //         //   Navigator.push(
+                                  //         //       context,
+                                  //         //       MaterialPageRoute(
+                                  //         //           builder: (context) => Math10Screen()));
+                                  //         // }
 
+                                  //       }),
+                                  // ),
+                                  // Container(
+                                  //   alignment: Alignment.center,
+                                  //   child: InkWell(
+                                  //     child: Container(
+                                  //       child: Container(
+                                  //         alignment: Alignment.center,
+                                  //         child: Text(
+                                  //           'Ôn thi tuyển sinh lớp 10',
+                                  //           style: TextStyle(
+                                  //               color: Color.fromRGBO(0, 0, 0, 1),
+                                  //               fontSize: 14,
+                                  //               fontWeight: FontWeight.bold),
+                                  //         ),
+                                  //       ),
+                                  //       margin:
+                                  //           EdgeInsets.only(top: 16, right: 7, bottom: 33),
+                                  //       decoration: BoxDecoration(
+                                  //         color: Color.fromRGBO(255, 189, 189, 1),
+                                  //         borderRadius: BorderRadius.circular(20),
+                                  //       ),
+                                  //       height: 50,
+                                  //       width: 190,
+                                  //     ),
+                                  //     onTap: () => setState(() {
 
+                                  //         Navigator.push(
+                                  //             context,
+                                  //             MaterialPageRoute(
+                                  //                 builder: (context) => English10Screen()));
 
- else  if(subject=='Hóa Học'){
-                 showDialog<String>(
-               
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                backgroundColor: Colors.black,
-                actions: <Widget>[
-                  
-                 
-                  Column(
-                 
-                    children: [
+                                  //     }),
+                                  //   ),
+                                  // ),
+
+                                  _special_exam()
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      }
+                    else if (subject == 'Hóa Học')
+                      {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            backgroundColor: Colors.black,
+                            actions: <Widget>[
+                              Column(
+                                children: [
 //                       SizedBox(
 //                         height: 10,
 //                       ),
@@ -434,8 +390,6 @@ _readData() async {
 //                                     MaterialPageRoute(
 //                                         builder: (context) =>
 //                                             Chemistry12Screen()));
-                          
-                             
 
 //                               // else if (subject == 'Toán') {
 //                               //   Navigator.push(
@@ -443,88 +397,49 @@ _readData() async {
 //                               //       MaterialPageRoute(
 //                               //           builder: (context) => Math10Screen()));
 //                               // }
-                           
+
 //                             }),
 //                       ),
-                    
+
 // SizedBox(
 //   height: 5,
 // ),
- 
-      _special_chemictry_exam()
 
-                       
-                    ],
-                  ),
-                ],
-              ),
-            )
-              }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- else  if(subject=='Sinh Học'){
-                 showDialog<String>(
-               
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                backgroundColor: Colors.black,
-                actions: <Widget>[
-                  
-                 
-                  Column(
-                 
-                    children: [
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       Center(
-//                         child: const Text('Chọn chương trình học',
-//                             style: TextStyle(
-//                                 color: Color.fromARGB(255, 249, 247, 247),
-//                                 fontSize: 20,
-//                                 fontWeight: FontWeight.bold)),
-//                       ),
-//                       SizedBox(
-//                         height: 15,
-//                       ),
-                   
-                    
-// SizedBox(
-//   height: 5,
-// ),
- 
-     _special_biology_exam()
-
-                       
-                    ],
-                  ),
-                ],
-              ),
-            )
-              }
-              else{
-                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            OthersubjectScreen(
-                                              subject: subject,
-                                            )))}})],
+                                  _special_chemictry_exam()
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      }
+                    else if (subject == 'Sinh Học')
+                      {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            backgroundColor: Colors.black,
+                            actions: <Widget>[
+                              Column(
+                                children: [_special_biology_exam()],
+                              ),
+                            ],
+                          ),
+                        )
+                      }
+                    else
+                      {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OthersubjectScreen(
+                                      subject: subject,
+                                    )))
+                      }
+                  })
+        ],
       ),
     );
   }
@@ -546,34 +461,6 @@ _readData() async {
     return Scaffold(
       body: Column(
         children: [
-          // Container(
-          //   height: height / 3.247,
-          //   width: width,
-          //   child: CarouselSlider(
-          //     options: CarouselOptions(
-          //       viewportFraction: 1,
-          //       autoPlay: true,
-          //       autoPlayInterval: Duration(seconds: 3),
-          //       //enlargeCenterPage: true,
-          //     ),
-          //     items: [
-          //       AssetHelper.carousel1,
-          //       AssetHelper.carousel2,
-          //       AssetHelper.carousel3,
-          //       AssetHelper.carousel4,
-          //     ].map((i) {
-          //       return Builder(
-          //         builder: (BuildContext context) {
-          //           return Container(
-          //             decoration: BoxDecoration(
-          //                 image: DecorationImage(
-          //                     image: AssetImage(i), fit: BoxFit.fill)),
-          //           );
-          //         },
-          //       );
-          //     }).toList(),
-          //   ),
-          // ),
           CarouselSlider.builder(
               carouselController: controller,
               itemCount: urlImages.length,
@@ -666,12 +553,7 @@ _readData() async {
   void animateToSlide(int index) => controller.animateToPage(index);
 }
 
-Widget buildImage(String urlImage, int index, dynamic width) =>
-    // Container(child: Image.asset(urlImage),
-
-    // )
-
-    Container(
+Widget buildImage(String urlImage, int index, dynamic width) => Container(
       width: width,
       decoration: BoxDecoration(
           image:

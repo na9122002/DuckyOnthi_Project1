@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:travo_app_source/screens/group_chat/Main_Group_Chat.dart';
+import 'package:travo_app_source/screens/group_chat/main_group_chat/main_group_chat.dart';
 import 'package:travo_app_source/screens/users/users_screen.dart';
-import 'package:travo_app_source/account/login_screen.dart';
+import 'package:travo_app_source/screens/account/login_screen.dart';
 import 'package:travo_app_source/helpers/asset_helper.dart';
 import 'package:travo_app_source/screens/representation/home_screen2.dart';
 
@@ -42,10 +42,8 @@ class _HomePageState extends State<HomePage> {
               index: _currentIndex,
               children: [
                 HomeScreen(),
-                // MainCourseScreen(),
                 Screen4,
                 Screen3,
-                // SettingScreen(),
               ],
             );
           }),
@@ -75,10 +73,6 @@ class _HomePageState extends State<HomePage> {
               icon: Image.asset(AssetHelper.Icon_User),
               title: Text(''),
             ),
-            // SalomonBottomBarItem(
-            //   icon: Image.asset(AssetHelper.Icon_Setting),
-            //   title: Text(''),
-            // ),
           ],
         ),
       ),
